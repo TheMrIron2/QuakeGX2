@@ -33,10 +33,10 @@ extern u32				fb;
 extern GXRModeObj		*rmode;
 
 static void	*gp_fifo;
-static const size_t	fifo_size = 1024 * 256;
+static const size_t	fifo_size = 1024 * 256; //fixme: WiiU FIFO size
 
-#define WARP_WIDTH              640
-#define WARP_HEIGHT             480
+#define WARP_WIDTH              1920
+#define WARP_HEIGHT             1080
 
 static int scr_width, scr_height;
 
@@ -133,8 +133,8 @@ void VID_ConModeUpdate(void)
 			vid.conheight = 420;
 			break;
 		case 4:
-			vid.conwidth = 640;
-			vid.conheight = 480;
+			vid.conwidth = 1920;
+			vid.conheight = 1080;
 			break;
 	}
 	if (vid.conheight > scr_height)

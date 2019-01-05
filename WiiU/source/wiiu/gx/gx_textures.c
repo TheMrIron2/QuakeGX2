@@ -221,8 +221,8 @@ void GL_ResampleTexture (unsigned *in, int inwidth, int inheight, unsigned *out,
 }
 
 // FIXME, temporary
-static	u32	scaled[640*480];
-static	u32	trans[640*480];
+static	u32	scaled[1920*1080];
+static	u32	trans[1920*1080];
 
 /*
 ===============
