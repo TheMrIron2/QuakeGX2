@@ -22,15 +22,17 @@ SOURCES		:=	src/wii\
 			src/wii/gx\
 			src/generic
 
-INCLUDES	:=	$(DEVKITPPC)/libogc/include \
-			$(DEVKITPRO)/libogc/include/ogc
+export INCLUDE  :=  $(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
+	            $(foreach dir,$(LIBDIRS),-I$(dir)/include) \
+	           -I$(CURDIR)/$(BUILD) \
+	           -I$(LIBOGC_INC) -I$(LIBOGC_INC)/ogc
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 
 CFLAGS	=		$(MACHDEP) $(INCLUDE) \
-			-g -O2 -Wcast-align -fno-merge-constants -fstrict-aliasing -fsingle-precision-constant \
+			-g -O2 -Wcast-align -ffast-math -fno-merge-constants -fstrict-aliasing -fsingle-precision-constant \
 			-DGXQUAKE -DNQ_HACK
 
 CXXFLAGS	=	-save-temps -Xassembler -aln=$@.lst $(CFLAGS)

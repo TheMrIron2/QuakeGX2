@@ -41,6 +41,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "input_wiimote.h"
 #include <network.h>
 #include <errno.h>
+#include <wiikeyboard/keyboard.h>
 
 #if USBGECKO_DEBUG
 #include <debug.h>
@@ -129,7 +130,8 @@ static void init()
 	PAD_Init();
 	
 	// Initialise the keyboard library
-	KEYBOARD_Init();
+	KEYBOARD_Init(NULL);
+	// null callback as we while() GetEvent(keyboard_event)s later --spotlight
 
 #ifndef DISABLE_WIIMOTE
 	if (WPAD_Init() != WPAD_ERR_NONE)
@@ -205,7 +207,7 @@ void frontend(void)
 	{
 		do 
 		{
-			sys_netinit_error = if_config(sys_ipaddress_text, NULL, NULL, TRUE);
+			sys_netinit_error = if_config(sys_ipaddress_text, NULL, NULL, NULL, TRUE);
 		} while((sys_netinit_error == -EAGAIN));
 
 		char temp_num[32];
